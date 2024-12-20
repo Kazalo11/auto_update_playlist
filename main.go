@@ -5,15 +5,15 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
 )
 
-const redirectURI = "http://localhost:8080/callback"
-
 var (
-	auth = spotifyauth.New(
+	redirectURI = os.Getenv("SPOTIFY_REDIRECT_URL")
+	auth        = spotifyauth.New(
 		spotifyauth.WithRedirectURL(redirectURI),
 		spotifyauth.WithScopes(spotifyauth.ScopeUserLibraryRead, spotifyauth.ScopePlaylistModifyPrivate, spotifyauth.ScopePlaylistModifyPublic),
 	)
